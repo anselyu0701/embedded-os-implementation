@@ -253,7 +253,7 @@ INT8U  OSTaskCreate (void   (*task)(void *p_arg),
                                              /* ... the same thing until task is created.              */
         OS_EXIT_CRITICAL();
         psp = OSTaskStkInit(task, p_arg, ptos, 0u);             /* Initialize the task's stack         */
-        err = OS_TCBInit(prio, psp, (OS_STK *)0, 0u, 0u, (void *)0, 0u, 0u, 0u);
+        err = OS_TCBInit(prio, psp, (OS_STK *)0, 0u, 0u, (void *)0, 0u);
         if (err == OS_ERR_NONE) {
             OS_TRACE_TASK_CREATE(OSTCBPrioTbl[prio]);
             if (OSRunning == OS_TRUE) {      /* Find highest priority task if multitasking has started */
@@ -1011,7 +1011,7 @@ INT8U  OSTaskSuspend (INT8U prio)
 #endif
 
 
-    
+
 #if OS_ARG_CHK_EN > 0u
     if (prio == OS_TASK_IDLE_PRIO) {                            /* Not allowed to suspend idle task    */
         return (OS_ERR_TASK_SUSPEND_IDLE);
@@ -1050,7 +1050,7 @@ INT8U  OSTaskSuspend (INT8U prio)
     OS_TRACE_TASK_SUSPEND(ptcb);
     OS_TRACE_TASK_SUSPENDED(ptcb);
     if (self == OS_TRUE) {                                      /* Context switch only if SELF         */
-        // OS_Sched();                                             /* Find new highest priority task      */
+        OS_Sched();                                             /* Find new highest priority task      */
     }
     return (OS_ERR_NONE);
 }
