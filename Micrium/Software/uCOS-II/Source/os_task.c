@@ -1050,7 +1050,7 @@ INT8U  OSTaskSuspend (INT8U prio)
     OS_TRACE_TASK_SUSPEND(ptcb);
     OS_TRACE_TASK_SUSPENDED(ptcb);
     if (self == OS_TRUE) {                                      /* Context switch only if SELF         */
-        OS_Sched();                                             /* Find new highest priority task      */
+        // OS_Sched();                                             /* Find new highest priority task      */
     }
     return (OS_ERR_NONE);
 }

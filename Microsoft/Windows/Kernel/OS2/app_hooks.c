@@ -117,7 +117,7 @@ void InputFile() {
     char* pTmp = NULL;
     int TaskInfo[INFO], i, j = 0;
     TASK_NUMBER = 0;
-    int start_priority = 1;
+
     while (!feof(fp))
     {
         i = 0;
@@ -139,16 +139,52 @@ void InputFile() {
                 TaskParameter[j].TaskExecutionTime = TaskInfo[i];
             else if (i == 3) {
                 TaskParameter[j].TaskPeriodic = TaskInfo[i];
+                // TaskParameter[j].TaskPriority = TaskInfo[i];
             }
+            else if (i == 4)
+                TaskParameter[j].R1LockTime = TaskInfo[i];
+            else if (i == 5)
+                TaskParameter[j].R1UnLockTime = TaskInfo[i];
+            else if (i == 6)
+                TaskParameter[j].R2LockTime = TaskInfo[i];
+            else if (i == 7)
+                TaskParameter[j].R2UnLockTime = TaskInfo[i];
             i++;
-        }
-        /*Initial Priority*/
-        TaskParameter[j].TaskPriority = start_priority;
-        start_priority++;
+        }        
         j++;
-        // start_priority++;
     }
     fclose(fp);
+}
+
+void setPriority()
+{
+    int TaskPrioTbl[101];
+    int period;
+    int prio = 1;
+
+    for (int idx = 0; idx < 101; idx++)
+    {
+        /* initialize TaskPrioTbl */
+        TaskPrioTbl[idx] = -1;
+    }
+
+    for (int i = 0; i < TASK_NUMBER; i++)
+    {
+        /* Mapping */
+        period = TaskParameter[i].TaskPeriodic;
+        TaskPrioTbl[period] = i;
+    }
+
+    for (int n = 1; n < 101; n++)
+    {
+        /* Traverse TaskPrioTbl */
+        if (TaskPrioTbl[n] != -1)
+        {
+            /* Identify which those exist value */
+            TaskParameter[TaskPrioTbl[n]].TaskPriority = prio;
+            prio++;
+        }
+    }
 }
 
 /*

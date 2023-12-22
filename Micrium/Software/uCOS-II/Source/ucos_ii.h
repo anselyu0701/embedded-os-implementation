@@ -65,14 +65,14 @@ extern "C" {
 
 
 /*  End time for the simulation */
-#define SYSTEM_END_TIME 40
+#define SYSTEM_END_TIME 100
 
 /*  Input file  */
 FILE* fp;
 #define INPUT_FILE_NAME "./TaskSet.txt"
 #define OUTPUT_FILE_NAME "./Output.txt"
-#define MAX 20      // Task maximum number
-#define INFO 4      // information of task
+#define MAX  20      // Task maximum number
+#define INFO 10      // information of task
 /*  Input file  */
 
 /*  Output file */
@@ -88,6 +88,10 @@ typedef struct task_para_set {
     INT16U TaskPeriodic;
     INT16U TaskNumber;
     INT16U TaskPriority;
+    INT16U R1LockTime;
+    INT16U R1UnLockTime;
+    INT16U R2LockTime;
+    INT16U R2UnLockTime;
 } task_para_set;
 
 int TASK_NUMBER;    // number of the input tasks
@@ -98,12 +102,6 @@ OS_STK** Task_STK;
 
 /*Create Task*/
 task_para_set TaskParameter[OS_MAX_TASKS];
-
-/* Create Task Node Structure */
-typedef struct os_task_node {
-    struct os_tcb         *tcb;
-
-} OS_TASK_NODE;
 
 #ifdef   OS_GLOBALS
 #define  OS_EXT
@@ -622,8 +620,15 @@ typedef struct os_tcb {
     INT8U            OSTCBExecuTimeCtr;     /* Task execution time for counting                        */
     INT8U            OSTCBArriTime;         /* Task arrive time                                        */
     INT8U            OSTCBPeriod;           /* The period of task                                      */
-    INT8U            OSTCBDelayTime;
-    INT8U            OSTCBDeadLine;         /* Task's deadline                                         */
+    INT8U            R1RelatLockTime;       /* The related lock time to resource1                      */ 
+    INT8U            R1RelatUnLockTime;     /* The related unlock time to resource1                    */
+    INT8U            R2RelatLockTime;       /* The related lock time to resource2                      */
+    INT8U            R2RelatUnLockTime;     /* The related unlock time to resource2                    */
+    INT8U            R1UnLockTime;          /* The really unlock time to resource1                     */
+    INT8U            R2UnLockTime;          /* The really unlock time to resource2                     */
+    INT8U            R1LockFlag;            /* When flaged, R1 is used by this task                    */
+    INT8U            R2LockFlag;            /* When flaged, R2 is used by this task                    */
+    INT16U           OSTCBBlockingTime;     /* The counter of blocking time                            */
 #endif
 
     struct os_tcb   *OSTCBNext;             /* Pointer to next     TCB in the TCB list                 */
@@ -744,13 +749,10 @@ typedef  void                      (*OS_TLS_DESTRUCT_PTR)(OS_TCB    *ptcb,
 *                                          GLOBAL VARIABLES
 *********************************************************************************************************
 */
-/*ansel*/
+
 OS_EXT  INT32U            OSCtxSwCtr;               /* Counter of number of context switches           */
-// OS_EXT  OS_TASK_NODE     *OSTaskNodeHead;           /* Pointer to head of linked list of Task Node Queue */
-// OS_EXT  OS_TASK_NODE     *OSTaskNodeRear;           /* Pointer to rear of linked list of Task Node Queue */
-OS_EXT  OS_TASK_NODE*     OSTaskHeapList;           /* Pointer to root of linked list of Task Node Heap*/
-OS_EXT  INT8U             OSTaskHeapLength;         /* Counter of number of heap node length           */ 
 OS_EXT  INT8U             resumeCurrTCB;
+OS_EXT  INT8U             OSNPCSLock;               /* NPCS Lock. if locked, sched block  */
 
 #if (OS_EVENT_EN) && (OS_MAX_EVENTS > 0u)
 OS_EXT  OS_EVENT         *OSEventFreeList;          /* Pointer to list of free EVENT control blocks    */
@@ -1346,15 +1348,12 @@ void          OSSchedLock             (void);
 void          OSSchedUnlock           (void);
 #endif
 
-void          OSInsertTaskHeap        (OS_TCB* ptcb);
-
 void          OSStart                 (void);
 
 void          OSStatInit              (void);
 
 INT16U        OSVersion               (void);
 
-void OSInsertTaskNode          (OS_TASK_NODE *, OS_TCB *);
 
 /*
 *********************************************************************************************************
@@ -1524,6 +1523,7 @@ void          OSIntCtxSw              (void);
 void          OSCtxSw                 (void);
 void          OutFileInit             (void);
 void          InputFile               (void);
+void          setPriority             (void);
 #endif
 
 

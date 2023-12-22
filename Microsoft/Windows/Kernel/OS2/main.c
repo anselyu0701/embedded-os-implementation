@@ -64,10 +64,7 @@ static  OS_STK  StartupTaskStk[APP_CFG_STARTUP_TASK_STK_SIZE];
 */
 
 static void task (void* p_arg);
-//static void task2 (void* p_arg);
-//static void task3(void* p_arg);
-//static void task4(void* p_arg);
-//static void task5(void* p_arg);
+
 static  void  StartupTask (void  *p_arg);
 
 
@@ -103,6 +100,8 @@ int  main (void)
     OutFileInit();
     /*Input File*/
     InputFile();
+    /* Priority Setting */
+    setPriority();
 
 
     /*Dynamic Create the Stack size*/
@@ -116,7 +115,6 @@ int  main (void)
 
     OSInit();                                              /* Initialize uC/OS-II                                  */
     /*Create Task Set*/
-
     for (n = 0; n < TASK_NUMBER; n++)
     {
         OSTaskCreateExt(task,                                 /*Create the task1*/
@@ -129,56 +127,7 @@ int  main (void)
             &TaskParameter[n],
             (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
     }
-
-    //OSTaskCreateExt(task1,                                 /*Create the task1*/
-    //    &TaskParameter[0],
-    //    &Task_STK[0][TASK_STACKSIZE - 1],
-    //    TaskParameter[0].TaskPriority,
-    //    TaskParameter[0].TaskID,
-    //    &Task_STK[0][0],
-    //    TASK_STACKSIZE,
-    //    &TaskParameter[0],
-    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
-
-    //OSTaskCreateExt(task2,                                 /*Create the task2*/
-    //    &TaskParameter[1],
-    //    &Task_STK[1][TASK_STACKSIZE - 1],
-    //    TaskParameter[1].TaskPriority,
-    //    TaskParameter[1].TaskID,
-    //    &Task_STK[1][0],
-    //    TASK_STACKSIZE,
-    //    &TaskParameter[1],
-    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
-
-    //OSTaskCreateExt(task3,                                 /*Create the task2*/
-    //    &TaskParameter[2],
-    //    &Task_STK[2][TASK_STACKSIZE - 1],
-    //    TaskParameter[2].TaskPriority,
-    //    TaskParameter[2].TaskID,
-    //    &Task_STK[2][0],
-    //    TASK_STACKSIZE,
-    //    &TaskParameter[2],
-    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
-
-    //OSTaskCreateExt(task4,                                 /*Create the task1*/
-    //    &TaskParameter[3],
-    //    &Task_STK[3][TASK_STACKSIZE - 1],
-    //    TaskParameter[3].TaskPriority,
-    //    TaskParameter[3].TaskID,
-    //    &Task_STK[3][0],
-    //    TASK_STACKSIZE,
-    //    &TaskParameter[3],
-    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
-
-    //OSTaskCreateExt(task5,                                 /*Create the task1*/
-    //    &TaskParameter[4],
-    //    &Task_STK[4][TASK_STACKSIZE - 1],
-    //    TaskParameter[4].TaskPriority,
-    //    TaskParameter[4].TaskID,
-    //    &Task_STK[4][0],
-    //    TASK_STACKSIZE,
-    //    &TaskParameter[4],
-    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+    
 
     /*
     OSTaskCreateExt( StartupTask,                               /* Create the startup task                              
@@ -216,47 +165,6 @@ void task(void* p_arg) {
         OSTimeDly(task_data->TaskPeriodic);
     }
 }
-
-//void task2(void* p_arg) {
-//    task_para_set* task_data;
-//    task_data = p_arg;
-//    while (1)
-//    {
-//        
-//        OSTimeDly(task_data->TaskPeriodic);
-//    }
-//}
-//
-//void task3(void* p_arg) {
-//    task_para_set* task_data;
-//    task_data = p_arg;
-//    while (1)
-//    {
-//
-//        OSTimeDly(task_data->TaskPeriodic);
-//    }
-//}
-//
-//void task4(void* p_arg) {
-//    task_para_set* task_data;
-//    task_data = p_arg;
-//    while (1)
-//    {
-//
-//        OSTimeDly(task_data->TaskPeriodic);
-//    }
-//}
-//
-//void task5(void* p_arg) {
-//    task_para_set* task_data;
-//    task_data = p_arg;
-//    while (1)
-//    {
-//
-//        OSTimeDly(task_data->TaskPeriodic);
-//    }
-//}
-
 
 /*
 *********************************************************************************************************
