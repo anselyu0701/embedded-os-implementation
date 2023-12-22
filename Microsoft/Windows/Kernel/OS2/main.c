@@ -103,7 +103,6 @@ int  main (void)
     /* Priority Setting */
     setPriority();
 
-
     /*Dynamic Create the Stack size*/
     Task_STK = malloc(TASK_NUMBER * sizeof(int*));
 

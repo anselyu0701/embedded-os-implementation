@@ -103,6 +103,10 @@ OS_STK** Task_STK;
 /*Create Task*/
 task_para_set TaskParameter[OS_MAX_TASKS];
 
+/* Resource Index */
+#define R1_idx 1
+#define R2_idx 2
+
 #ifdef   OS_GLOBALS
 #define  OS_EXT
 #else
@@ -620,15 +624,17 @@ typedef struct os_tcb {
     INT8U            OSTCBExecuTimeCtr;     /* Task execution time for counting                        */
     INT8U            OSTCBArriTime;         /* Task arrive time                                        */
     INT8U            OSTCBPeriod;           /* The period of task                                      */
-    INT8U            R1RelatLockTime;       /* The related lock time to resource1                      */ 
-    INT8U            R1RelatUnLockTime;     /* The related unlock time to resource1                    */
-    INT8U            R2RelatLockTime;       /* The related lock time to resource2                      */
-    INT8U            R2RelatUnLockTime;     /* The related unlock time to resource2                    */
-    INT8U            R1UnLockTime;          /* The really unlock time to resource1                     */
-    INT8U            R2UnLockTime;          /* The really unlock time to resource2                     */
-    INT8U            R1LockFlag;            /* When flaged, R1 is used by this task                    */
-    INT8U            R2LockFlag;            /* When flaged, R2 is used by this task                    */
-    INT16U           OSTCBBlockingTime;     /* The counter of blocking time                            */
+    /* Resource */
+    INT8U            OrigPrio;
+    INT8U            R1RelatLockTime;       /* The lock time to resource1                              */ 
+    INT8U            R1RelatUnLockTime;     /* The unlock time to resource1                            */
+    INT8U            R2RelatLockTime;       /* The lock time to resource2                              */
+    INT8U            R2RelatUnLockTime;     /* The unlock time to resource2                            */
+    INT8U            R1UnLockTime;          /* The unlock time to resource1                            */
+    INT8U            R2UnLockTime;          /* The unlock time to resource2                            */
+    INT8U            R1LockFlag;            /* The lock flag to resource1                              */
+    INT8U            R2LockFlag;            /* The lock flag to resource2                              */
+    INT16U           OSTCBBlockingTime;     /* The blocking time                                     */
 #endif
 
     struct os_tcb   *OSTCBNext;             /* Pointer to next     TCB in the TCB list                 */
@@ -752,7 +758,8 @@ typedef  void                      (*OS_TLS_DESTRUCT_PTR)(OS_TCB    *ptcb,
 
 OS_EXT  INT32U            OSCtxSwCtr;               /* Counter of number of context switches           */
 OS_EXT  INT8U             resumeCurrTCB;
-OS_EXT  INT8U             OSNPCSLock;               /* NPCS Lock. if locked, sched block  */
+OS_EXT  INT8U             R1_ceiling;               /* R1 ceiling */
+OS_EXT  INT8U             R2_ceiling;               /* R2 ceiling */
 
 #if (OS_EVENT_EN) && (OS_MAX_EVENTS > 0u)
 OS_EXT  OS_EVENT         *OSEventFreeList;          /* Pointer to list of free EVENT control blocks    */
@@ -1347,6 +1354,8 @@ void          OSSafetyCriticalStart   (void);
 void          OSSchedLock             (void);
 void          OSSchedUnlock           (void);
 #endif
+
+void          computeResourceCeiling  (OS_TCB*);
 
 void          OSStart                 (void);
 

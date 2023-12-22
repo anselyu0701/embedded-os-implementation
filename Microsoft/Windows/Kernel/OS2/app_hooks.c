@@ -139,7 +139,6 @@ void InputFile() {
                 TaskParameter[j].TaskExecutionTime = TaskInfo[i];
             else if (i == 3) {
                 TaskParameter[j].TaskPeriodic = TaskInfo[i];
-                // TaskParameter[j].TaskPriority = TaskInfo[i];
             }
             else if (i == 4)
                 TaskParameter[j].R1LockTime = TaskInfo[i];
@@ -181,7 +180,7 @@ void setPriority()
         if (TaskPrioTbl[n] != -1)
         {
             /* Identify which those exist value */
-            TaskParameter[TaskPrioTbl[n]].TaskPriority = prio;
+            TaskParameter[TaskPrioTbl[n]].TaskPriority = prio * 3;
             prio++;
         }
     }

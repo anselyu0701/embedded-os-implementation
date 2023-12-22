@@ -6,16 +6,16 @@
   lib_str.c
   os_cpu_c.c
   os_core.c
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_core.c(1057,9): warning C4013: 'exit' undefined; assuming extern returning int
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_core.c(1032,19): warning C4101: 'y': unreferenced local variable
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_core.c(2246,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_core.c(2247,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_core.c(2248,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_core.c(2249,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_core.c(2261,62): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_core.c(2262,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_core.c(2276,62): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_core.c(2277,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_core.c(1098,9): warning C4013: 'exit' undefined; assuming extern returning int
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_core.c(1073,19): warning C4101: 'y': unreferenced local variable
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_core.c(2317,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_core.c(2318,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_core.c(2319,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_core.c(2320,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_core.c(2332,62): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_core.c(2333,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_core.c(2347,62): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_core.c(2348,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
   os_dbg_r.c
   os_flag.c
   os_mbox.c
@@ -24,23 +24,23 @@ C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Mi
   os_q.c
   os_sem.c
   os_task.c
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_task.c(256,73): warning C4020: 'OS_TCBInit': too many actual parameters
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_task.c(256,73): warning C4020: 'OS_TCBInit': too many actual parameters
   os_time.c
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Micrium\Software\uCOS-II\Source\os_time.c(57,16): warning C4101: 'y': unreferenced local variable
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Micrium\Software\uCOS-II\Source\os_time.c(57,16): warning C4101: 'y': unreferenced local variable
   os_tmr.c
   bsp_cpu.c
   app_hooks.c
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Microsoft\Windows\Kernel\OS2\app_hooks.c(129,27): warning C4013: 'atoi' undefined; assuming extern returning int
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Microsoft\Windows\Kernel\OS2\app_hooks.c(129,27): warning C4013: 'atoi' undefined; assuming extern returning int
   Generating Code...
   Compiling...
   main.c
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Microsoft\Windows\Kernel\OS2\main.c(100,5): warning C4013: 'OutFileInit' undefined; assuming extern returning int
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Microsoft\Windows\Kernel\OS2\main.c(102,5): warning C4013: 'InputFile' undefined; assuming extern returning int
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Microsoft\Windows\Kernel\OS2\main.c(104,5): warning C4013: 'setPriority' undefined; assuming extern returning int
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Microsoft\Windows\Kernel\OS2\main.c(108,16): warning C4013: 'malloc' undefined; assuming extern returning int
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Microsoft\Windows\Kernel\OS2\main.c(108,14): warning C4047: '=': 'OS_STK **' differs in levels of indirection from 'int'
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Microsoft\Windows\Kernel\OS2\main.c(113,21): warning C4047: '=': 'OS_STK *' differs in levels of indirection from 'int'
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Microsoft\Windows\Kernel\OS2\main.c(123,29): warning C4244: 'function': conversion from 'INT16U' to 'INT8U', possible loss of data
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Microsoft\Windows\Kernel\OS2\main.c(89,17): warning C4101: 'os_err': unreferenced local variable
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Microsoft\Windows\Kernel\OS2\main.c(100,5): warning C4013: 'OutFileInit' undefined; assuming extern returning int
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Microsoft\Windows\Kernel\OS2\main.c(102,5): warning C4013: 'InputFile' undefined; assuming extern returning int
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Microsoft\Windows\Kernel\OS2\main.c(104,5): warning C4013: 'setPriority' undefined; assuming extern returning int
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Microsoft\Windows\Kernel\OS2\main.c(107,16): warning C4013: 'malloc' undefined; assuming extern returning int
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Microsoft\Windows\Kernel\OS2\main.c(107,14): warning C4047: '=': 'OS_STK **' differs in levels of indirection from 'int'
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Microsoft\Windows\Kernel\OS2\main.c(112,21): warning C4047: '=': 'OS_STK *' differs in levels of indirection from 'int'
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Microsoft\Windows\Kernel\OS2\main.c(122,29): warning C4244: 'function': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Microsoft\Windows\Kernel\OS2\main.c(89,17): warning C4101: 'os_err': unreferenced local variable
   Generating Code...
-  OS2.vcxproj -> C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_NPCS\Microsoft\Windows\Kernel\OS2\VS\Debug\OS2.exe
+  OS2.vcxproj -> C:\Users\Ansel\Desktop\Embedded OS Implementation\PA3\RTOS_M11202117_PA3_CPP\Microsoft\Windows\Kernel\OS2\VS\Debug\OS2.exe
