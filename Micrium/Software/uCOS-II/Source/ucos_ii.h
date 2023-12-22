@@ -612,6 +612,10 @@ typedef struct os_tcb {
     INT32U           OSTCBStkSize;          /* Size of task stack (in number of stack elements)        */
     INT16U           OSTCBOpt;              /* Task options as passed by OSTaskCreateExt()             */
     INT16U           OSTCBId;               /* Task ID (0..65535)                                      */
+    INT8U            OSTCBExecuTime;        /* Task execution time                                     */
+    INT8U            OSTCBExecuTimeCtr;     /* Task execution time for counting                        */
+    INT8U            OSTCBArriTime;         /* Task arrive time                                        */
+    INT8U            OSTCBPeriod;           /* The period of task                                      */
 #endif
 
     struct os_tcb   *OSTCBNext;             /* Pointer to next     TCB in the TCB list                 */
@@ -734,6 +738,7 @@ typedef  void                      (*OS_TLS_DESTRUCT_PTR)(OS_TCB    *ptcb,
 */
 
 OS_EXT  INT32U            OSCtxSwCtr;               /* Counter of number of context switches           */
+OS_EXT  INT8U             isCurrTCBFinish;
 
 #if (OS_EVENT_EN) && (OS_MAX_EVENTS > 0u)
 OS_EXT  OS_EVENT         *OSEventFreeList;          /* Pointer to list of free EVENT control blocks    */

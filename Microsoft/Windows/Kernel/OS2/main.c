@@ -65,6 +65,9 @@ static  OS_STK  StartupTaskStk[APP_CFG_STARTUP_TASK_STK_SIZE];
 
 static void task1 (void* p_arg);
 static void task2 (void* p_arg);
+static void task3(void* p_arg);
+static void task4(void* p_arg);
+static void task5(void* p_arg);
 static  void  StartupTask (void  *p_arg);
 
 
@@ -133,6 +136,36 @@ int  main (void)
         &TaskParameter[1],
         (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
+    OSTaskCreateExt(task3,                                 /*Create the task2*/
+        &TaskParameter[2],
+        &Task_STK[2][TASK_STACKSIZE - 1],
+        TaskParameter[2].TaskPriority,
+        TaskParameter[2].TaskID,
+        &Task_STK[2][0],
+        TASK_STACKSIZE,
+        &TaskParameter[2],
+        (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+    //OSTaskCreateExt(task4,                                 /*Create the task2*/
+    //    &TaskParameter[3],
+    //    &Task_STK[3][TASK_STACKSIZE - 1],
+    //    TaskParameter[3].TaskPriority,
+    //    TaskParameter[3].TaskID,
+    //    &Task_STK[3][0],
+    //    TASK_STACKSIZE,
+    //    &TaskParameter[3],
+    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+    //OSTaskCreateExt(task5,                                 /*Create the task2*/
+    //    &TaskParameter[4],
+    //    &Task_STK[4][TASK_STACKSIZE - 1],
+    //    TaskParameter[4].TaskPriority,
+    //    TaskParameter[4].TaskID,
+    //    &Task_STK[4][0],
+    //    TASK_STACKSIZE,
+    //    &TaskParameter[4],
+    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
     /*
     OSTaskCreateExt( StartupTask,                               /* Create the startup task                              
                      0,
@@ -165,14 +198,7 @@ void task1(void* p_arg) {
     task_data = p_arg;
     while (1)
     {        
-        // printf("Tick: %d, Hello from task%d\n", OSTimeGet(), task_data -> TaskID);
-        /*
-        if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0)
-        {
-            fprintf(Output_fp, "Tick: %d, Hello from task%d\n", OSTime, task_data->TaskID);
-            fclose(Output_fp);
-        }
-        */
+        
         OSTimeDly(task_data->TaskPeriodic);
     }
 }
@@ -182,14 +208,37 @@ void task2(void* p_arg) {
     task_data = p_arg;
     while (1)
     {
-        /*
-        printf("Tick: %d, Hello from task%d\n", OSTime, task_data->TaskID);
-        if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0)
-        {
-            fprintf(Output_fp, "Tick: %d, Hello from task%d\n", OSTime, task_data->TaskID);
-            fclose(Output_fp);
-        }
-        */
+        
+        OSTimeDly(task_data->TaskPeriodic);
+    }
+}
+
+void task3(void* p_arg) {
+    task_para_set* task_data;
+    task_data = p_arg;
+    while (1)
+    {
+
+        OSTimeDly(task_data->TaskPeriodic);
+    }
+}
+
+void task4(void* p_arg) {
+    task_para_set* task_data;
+    task_data = p_arg;
+    while (1)
+    {
+
+        OSTimeDly(task_data->TaskPeriodic);
+    }
+}
+
+void task5(void* p_arg) {
+    task_para_set* task_data;
+    task_data = p_arg;
+    while (1)
+    {
+
         OSTimeDly(task_data->TaskPeriodic);
     }
 }

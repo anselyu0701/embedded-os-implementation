@@ -1,3 +1,9 @@
 ﻿  os_core.c
-C:\Users\Ansel\Desktop\Embedded OS Implementation\RTOS_M11202117_HW1\M11202117_RTOS_HW1\Micrium\Software\uCOS-II\Source\os_core.c(994,9): warning C4013: 'exit' undefined; assuming extern returning int
-  OS2.vcxproj -> C:\Users\Ansel\Desktop\Embedded OS Implementation\RTOS_M11202117_HW1\M11202117_RTOS_HW1\Microsoft\Windows\Kernel\OS2\VS\Debug\OS2.exe
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(1045,9): warning C4013: 'exit' undefined; assuming extern returning int
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(1022,19): warning C4101: 'y': unreferenced local variable
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(2178,35): warning C4305: '=': truncation from 'int' to 'INT8U'
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(2180,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(2181,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(2182,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(2183,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
+  OS2.vcxproj -> C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Microsoft\Windows\Kernel\OS2\VS\Debug\OS2.exe
