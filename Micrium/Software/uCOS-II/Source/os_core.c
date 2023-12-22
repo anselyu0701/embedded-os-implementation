@@ -717,98 +717,68 @@ void  OSIntExit (void)
 #if OS_TASK_PROFILE_EN > 0u
                     /*ansel*/
                     //printf("%d\n", OSTCBCur->OSTCBExecuTimeCtr);
-                    if (isAperiodicJosFinish == 0)
-                    {
-                        if (OSTCBCur->OSTCBPrio != OS_TASK_IDLE_PRIO) {
-                            if (OSTCBCur->OSTCBExecuTimeCtr == 0) {
-                                if (OSTCBHighRdy->OSTCBPrio == OS_TASK_IDLE_PRIO) {
-                                    printf("%2d\t Completion\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
-                                    printf("task(%2d)\t\t", OSTCBHighRdy->OSTCBPrio);
-                                    printf("%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime); /*Response Time*/
-                                    printf("%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime - OSTCBCur->OSTCBExecuTime); /*Preemptive Time*/
-                                    printf("%2d\n", OSTCBCur->OSTCBPeriod - (OSTimeGet() - OSTCBCur->OSTCBArriTime));  /* Delay Time    */
-                                    if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
-                                        fprintf(Output_fp, "%2d\t Completion\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
-                                        fprintf(Output_fp, "task(%2d)\t\t", OSTCBHighRdy->OSTCBPrio);
-                                        fprintf(Output_fp, "%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime); /*Response Time*/
-                                        fprintf(Output_fp, "%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime - OSTCBCur->OSTCBExecuTime); /*Preemptive Time*/
-                                        fprintf(Output_fp, "%2d\n", OSTCBCur->OSTCBPeriod - (OSTimeGet() - OSTCBCur->OSTCBArriTime));  /* Delay Time    */
-                                        fclose(Output_fp);
-                                    }
-                                }
-                                else {
-                                    printf("%2d\t Completion\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
-                                    printf("task(%2d)(%2d)\t\t", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
-                                    printf("%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime);
-                                    printf("%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime - OSTCBCur->OSTCBExecuTime); /*Preemptive Time*/
-                                    printf("%2d\n", OSTCBCur->OSTCBPeriod - (OSTimeGet() - OSTCBCur->OSTCBArriTime));  /* Delay Time    */
-                                    if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
-                                        fprintf(Output_fp, "%2d\t Completion\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
-                                        fprintf(Output_fp, "task(%2d)(%2d)\t\t", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
-                                        fprintf(Output_fp, "%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime);
-                                        fprintf(Output_fp, "%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime - OSTCBCur->OSTCBExecuTime); /*Preemptive Time*/
-                                        fprintf(Output_fp, "%2d\n", OSTCBCur->OSTCBPeriod - (OSTimeGet() - OSTCBCur->OSTCBArriTime));  /* Delay Time    */
-                                        fclose(Output_fp);
-                                    }
-
-                                }
-                                OSTCBCur->OSTCBCtxSwCtr++;
-                                if (resumeCurrTCB == 1)
-                                {
-                                    OSTCBCur->OSTCBArriTime = OSTimeGet();
-                                    OSTCBCur->OSTCBExecuTimeCtr = OSTCBCur->OSTCBExecuTime;
-                                    OSTCBCur->OSTCBDeadLine = OSTimeGet() + OSTCBCur->OSTCBPeriod;
-                                    OSInsertTaskHeap(OSTCBCur);
-                                    resumeCurrTCB = 0;
-                                }
-                            }
-                            else {
-                                printf("%2d\t Preemption\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
-                                printf("task(%2d)(%2d)\t \n", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
+                    if (OSTCBCur->OSTCBPrio != OS_TASK_IDLE_PRIO) {
+                        if (OSTCBCur->OSTCBExecuTimeCtr == 0) {
+                            if (OSTCBHighRdy->OSTCBPrio == OS_TASK_IDLE_PRIO) {
+                                printf("%2d\t Completion\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
+                                printf("task(%2d)\t\t", OSTCBHighRdy->OSTCBPrio);
+                                printf("%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime); /*Response Time*/
+                                printf("%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime - OSTCBCur->OSTCBExecuTime); /*Preemptive Time*/
+                                printf("%2d\n", OSTCBCur->OSTCBPeriod - (OSTimeGet() - OSTCBCur->OSTCBArriTime));  /* Delay Time    */
                                 if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
-                                    fprintf(Output_fp, "%2d\t Preemption\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
-                                    fprintf(Output_fp, "task(%2d)(%2d)\t \n", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
+                                    fprintf(Output_fp, "%2d\t Completion\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
+                                    fprintf(Output_fp, "task(%2d)\t\t", OSTCBHighRdy->OSTCBPrio);
+                                    fprintf(Output_fp, "%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime); /*Response Time*/
+                                    fprintf(Output_fp, "%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime - OSTCBCur->OSTCBExecuTime); /*Preemptive Time*/
+                                    fprintf(Output_fp, "%2d\n", OSTCBCur->OSTCBPeriod - (OSTimeGet() - OSTCBCur->OSTCBArriTime));  /* Delay Time    */
                                     fclose(Output_fp);
                                 }
                             }
+                            else {
+                                printf("%2d\t Completion\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
+                                printf("task(%2d)(%2d)\t\t", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
+                                printf("%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime);
+                                printf("%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime - OSTCBCur->OSTCBExecuTime); /*Preemptive Time*/
+                                printf("%2d\n", OSTCBCur->OSTCBPeriod - (OSTimeGet() - OSTCBCur->OSTCBArriTime));  /* Delay Time    */
+                                if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
+                                    fprintf(Output_fp, "%2d\t Completion\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
+                                    fprintf(Output_fp, "task(%2d)(%2d)\t\t", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
+                                    fprintf(Output_fp, "%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime);
+                                    fprintf(Output_fp, "%2d\t\t", OSTimeGet() - OSTCBCur->OSTCBArriTime - OSTCBCur->OSTCBExecuTime); /*Preemptive Time*/
+                                    fprintf(Output_fp, "%2d\n", OSTCBCur->OSTCBPeriod - (OSTimeGet() - OSTCBCur->OSTCBArriTime));  /* Delay Time    */
+                                    fclose(Output_fp);
+                                }
+
+                            }
+                            OSTCBCur->OSTCBCtxSwCtr++;
+                            if (resumeCurrTCB == 1)
+                            {
+                                OSTCBCur->OSTCBArriTime = OSTimeGet();
+                                OSTCBCur->OSTCBExecuTimeCtr = OSTCBCur->OSTCBExecuTime;
+                                OSTCBCur->OSTCBDeadLine = OSTimeGet() + OSTCBCur->OSTCBPeriod;
+                                OSInsertTaskHeap(OSTCBCur);
+                                resumeCurrTCB = 0;
+                            }
                         }
                         else {
-                            printf("%2d\t Preemption\t task(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBPrio);
+                            printf("%2d\t Preemption\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
                             printf("task(%2d)(%2d)\t \n", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
                             if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
-                                fprintf(Output_fp, "%2d\t Preemption\t task(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBPrio);
+                                fprintf(Output_fp, "%2d\t Preemption\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
                                 fprintf(Output_fp, "task(%2d)(%2d)\t \n", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
                                 fclose(Output_fp);
                             }
                         }
                     }
-                    else
-                    {
-                        isAperiodicJosFinish = 0;
+                    else {
+                        printf("%2d\t Preemption\t task(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBPrio);
+                        printf("task(%2d)(%2d)\t \n", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
                         if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
-                            printf("%2d\t Completion\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);
-                            fprintf(Output_fp, "%2d\t Completion\t task(%2d)(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBId, OSTCBCur->OSTCBCtxSwCtr);                            
-                            if (OSTCBHighRdy->OSTCBPrio == OS_TASK_IDLE_PRIO)
-                            {
-                                printf("task(%2d)\t\t", OSTCBHighRdy->OSTCBPrio);
-                                fprintf(Output_fp, "task(%2d)\t\t", OSTCBHighRdy->OSTCBPrio);
-                            }
-                            else
-                            {
-                                printf("task(%2d)(%2d)\t\t", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
-                                fprintf(Output_fp, "task(%2d)(%2d)\t\t", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
-                            }
-                            printf("%2d\t\t", ap_response_time); /*Response Time*/
-                            fprintf(Output_fp, "%2d\t\t", ap_response_time);
-                            printf("%2d\t\t", ap_preemptive_time); /*Preemptive Time*/
-                            fprintf(Output_fp, "%2d\t\t", ap_preemptive_time);
-                            printf("N/A\n");  /* Delay Time    */
-                            fprintf(Output_fp, "N/A\n");
+                            fprintf(Output_fp, "%2d\t Preemption\t task(%2d)\t\t", OSTimeGet(), OSTCBCur->OSTCBPrio);
+                            fprintf(Output_fp, "task(%2d)(%2d)\t \n", OSTCBHighRdy->OSTCBId, OSTCBHighRdy->OSTCBCtxSwCtr);
                             fclose(Output_fp);
                         }
-                        OSTCBCur->OSTCBCtxSwCtr++;
                     }
-                    
                     /* ansel */
 #endif
                     OSCtxSwCtr++;                          /* Keep track of the number of ctx switches */
@@ -978,7 +948,8 @@ void minHeapify(INT8U idx)
         {
             smallest = left;
         }
-        if ((OSTaskHeapList[left].tcb->OSTCBDeadLine == OSTaskHeapList[idx].tcb->OSTCBDeadLine) && (OSTaskHeapList[left].tcb->OSTCBPrio < OSTaskHeapList[idx].tcb->OSTCBPrio))
+        if ((OSTaskHeapList[left].tcb->OSTCBDeadLine == OSTaskHeapList[idx].tcb->OSTCBDeadLine) && 
+            (OSTaskHeapList[left].tcb->OSTCBPrio < OSTaskHeapList[idx].tcb->OSTCBPrio))
         {
             smallest = left;
         }
@@ -989,7 +960,8 @@ void minHeapify(INT8U idx)
         {
             smallest = right;
         }
-        if ((OSTaskHeapList[right].tcb->OSTCBDeadLine == OSTaskHeapList[idx].tcb->OSTCBDeadLine) && (OSTaskHeapList[right].tcb->OSTCBPrio < OSTaskHeapList[idx].tcb->OSTCBPrio))
+        if ((OSTaskHeapList[right].tcb->OSTCBDeadLine == OSTaskHeapList[idx].tcb->OSTCBDeadLine) && 
+            (OSTaskHeapList[right].tcb->OSTCBPrio < OSTaskHeapList[idx].tcb->OSTCBPrio))
         {
             smallest = right;
         }
@@ -1019,7 +991,8 @@ void OSInsertTaskHeap (OS_TCB* ptcb)
     while ((idx > 1))
     {
         if ((OSTaskHeapList[parent].tcb->OSTCBDeadLine > OSTaskHeapList[idx].tcb->OSTCBDeadLine) ||
-            ((OSTaskHeapList[parent].tcb->OSTCBDeadLine == OSTaskHeapList[idx].tcb->OSTCBDeadLine) && (OSTaskHeapList[parent].tcb->OSTCBId > OSTaskHeapList[idx].tcb->OSTCBId)))
+            ((OSTaskHeapList[parent].tcb->OSTCBDeadLine == OSTaskHeapList[idx].tcb->OSTCBDeadLine) && 
+                (OSTaskHeapList[parent].tcb->OSTCBId > OSTaskHeapList[idx].tcb->OSTCBId)))
         {
             OS_TCB* temp_tcb = OSTaskHeapList[parent].tcb;
             OSTaskHeapList[parent].tcb = OSTaskHeapList[idx].tcb;
@@ -1034,80 +1007,21 @@ void OSInsertTaskHeap (OS_TCB* ptcb)
     }
 }
 
-void OSPopCUSQueue(void)
-{
-    aperiodic_job_node* temp_node = OSCUSRdyQueue;
-    OSCUSRdyQueue = OSCUSRdyQueue->next;
-    free(temp_node);
-}
-
-void OSInsertCUSQueue(aperiodic_job_para_set* job)
-{
-    aperiodic_job_node* new_node = (aperiodic_job_node*)malloc(sizeof(aperiodic_job_node));
-    new_node->job = job;
-    new_node->next = ((aperiodic_job_para_set*)0);
-    if (OSCUSRdyQueue == (aperiodic_job_node*)0) // empty queue
-    {
-        OSCUSRdyQueue = new_node;
-        return;
-    }
-
-    // only for 2 job
-    if (OSCUSRdyQueue->job->JobDeadline < job->JobDeadline)
-    {
-        OSCUSRdyQueue->next = job;
-    }
-    else
-    {
-        new_node->next = OSCUSRdyQueue;
-        OSCUSRdyQueue->next = (aperiodic_job_node*)0;
-        OSCUSRdyQueue = new_node;
-    }
-
-}
-
 void  OSStart (void)
 {
     OS_TCB *ptcb;
-    CUS.serverDeadline = 99;
-    CUS.serverBudget = 0;
     OSTaskHeapLength = 0;
-    OSCUSRdyQueue = (aperiodic_job_node*)0;
-    isAperiodicJosFinish = 0;
-    
-
-    INT8U aperiodic_idx = 0;
 
     if (OSRunning == OS_FALSE) {
         OSTimeSet(0);                                
-        while (aperiodic_idx < 2) // aperiodic job arrive
-        {
-            if (AperiodicJob[aperiodic_idx].JobArriveTime == OSTimeGet())
-            {
-                CUS.serverDeadline = OSTimeGet() + (int)(AperiodicJob[aperiodic_idx].JobExecutionTimeCtr / CUS.serverSize);
-                CUS.serverBudget = AperiodicJob[aperiodic_idx].JobExecutionTimeCtr;
-                OSInsertCUSQueue(&AperiodicJob[aperiodic_idx]);
-                printf("%2d\t Aperiodic job(%d) arrives and sets CUS server's deadline as %2d.\n", OSTimeGet(), aperiodic_idx, CUS.serverDeadline);
-                if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
-                    fprintf(Output_fp, "%2d\t Aperiodic job(%d) arrives and sets CUS server's deadline as %2d.\n", OSTimeGet(), aperiodic_idx, CUS.serverDeadline);
-                    fclose(Output_fp);
-                }
-            }
-            aperiodic_idx++;
-        }
-        CUS_TCB->OSTCBDeadLine = CUS.serverDeadline;
-
         ptcb = OSTCBList;
         while (ptcb->OSTCBPrio != OS_TASK_IDLE_PRIO) {
-            if (ptcb->OSTCBArriTime == OSTimeGet()) {   // periodic task arrival                
-                if (ptcb != CUS_TCB)
-                {
-                    ptcb->OSTCBDeadLine = OSTimeGet() + ptcb->OSTCBPeriod;
-                }
+            if (ptcb->OSTCBArriTime == OSTimeGet()) {
+                ptcb->OSTCBDeadLine = OSTimeGet() + ptcb->OSTCBPeriod;
                 OSInsertTaskHeap(ptcb);
             }
             ptcb = ptcb->OSTCBNext;
-        }
+        }          
 
         OS_SchedNew();                                  /* Find highest priority's task priority number   */
         OSPrioCur     = OSPrioHighRdy;
@@ -1184,7 +1098,6 @@ void  OSTimeTick (void)
 {
     OS_TCB          *ptcb;
     INT8U            y;
-    INT8U            aperiodic_idx;
 #if OS_TICK_STEP_EN > 0u
     BOOLEAN    step;
 #endif
@@ -1212,7 +1125,6 @@ void  OSTimeTick (void)
     /*Setting the end time for the OS*/
 
     if (OSRunning == OS_TRUE) {
-
         /*Exeuction Time*/
         if (--OSTCBCur->OSTCBExecuTimeCtr == 0u) {  /* Executing  */
             OSTaskHeapList[1].tcb = OSTaskHeapList[OSTaskHeapLength].tcb;
@@ -1220,87 +1132,6 @@ void  OSTimeTick (void)
             OSTaskHeapLength--;
             minHeapify(1);
         }
-
-        /* Aperiodic Job Execution */
-        if (OSTCBCur->OSTCBId == 3)
-        {
-            CUS.serverBudget--;
-            if (--OSCUSRdyQueue->job->JobExecutionTimeCtr == 0) // aperiodic job finished
-            {
-                printf("%2d\t Aperiodic job(%d) is finished.\n", OSTimeGet(), OSCUSRdyQueue->job->JobNo);
-                if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
-                    fprintf(Output_fp, "%2d\t Aperiodic job(%d) is finished.\n", OSTimeGet(), OSCUSRdyQueue->job->JobNo);
-                    fclose(Output_fp);
-                }
-                isAperiodicJosFinish = 1;
-                ap_response_time = OSTimeGet() - OSCUSRdyQueue->job->JobArriveTime;
-                ap_preemptive_time = OSTimeGet() - OSCUSRdyQueue->job->JobArriveTime - OSCUSRdyQueue->job->JobExecutionTime;
-                OSPopCUSQueue();
-                CUS_TCB->OSTCBDeadLine = 99; // let CUS cannot be scheduled
-                minHeapify(1);
-            }
-        }
-
-        /* when time meets CUS's deadline */
-        if (OSTimeGet() == CUS.serverDeadline)
-        {
-            if (OSCUSRdyQueue != (aperiodic_job_node*)0) // aperiodic job queue is non-empty
-            {
-                CUS.serverDeadline = OSTimeGet() + (int)(OSCUSRdyQueue->job->JobExecutionTimeCtr / CUS.serverSize);
-                CUS.serverBudget = OSCUSRdyQueue->job->JobExecutionTimeCtr;
-                printf("%2d\t Aperiodic job(%d) sets CUS server's deadline as %2d.\n", OSTimeGet(), OSCUSRdyQueue->job->JobNo, CUS.serverDeadline);
-                if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
-                    fprintf(Output_fp, "%2d\t Aperiodic job(%d) sets CUS server's deadline as %2d.\n", OSTimeGet(), OSCUSRdyQueue->job->JobNo, CUS.serverDeadline);
-                    fclose(Output_fp);
-                }
-                CUS_TCB->OSTCBDeadLine = CUS.serverDeadline; // set CUS's deadline that leads to be schedulable
-            }
-        }
-
-        /* aperiodic job arrives */
-        aperiodic_idx = 0;
-        while (aperiodic_idx < 2)
-        {
-            if (AperiodicJob[aperiodic_idx].JobArriveTime == OSTimeGet())
-            {
-                if (CUS.serverDeadline == 99) // if aperiodic queue is empty now
-                {
-                    OSInsertCUSQueue(&AperiodicJob[aperiodic_idx]);
-                    CUS.serverDeadline = OSTimeGet() + (int)(OSCUSRdyQueue->job->JobExecutionTimeCtr / CUS.serverSize);
-                    CUS.serverBudget = OSCUSRdyQueue->job->JobExecutionTimeCtr;
-                    printf("%2d\t Aperiodic job(%d) arrives and sets CUS server's deadline as %2d.\n", OSTimeGet(), aperiodic_idx, CUS.serverDeadline);
-                    if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
-                        fprintf(Output_fp, "%2d\t Aperiodic job(%d) arrives and sets CUS server's deadline as %2d.\n", OSTimeGet(), aperiodic_idx, CUS.serverDeadline);
-                        fclose(Output_fp);
-                    }
-                }
-                else // if aperiodic queue is non-empty now
-                {
-                    OSInsertCUSQueue(&AperiodicJob[aperiodic_idx]);
-                    if (OSTimeGet() >= CUS.serverDeadline)
-                    {
-                        CUS.serverDeadline = OSTimeGet() + (int)(AperiodicJob[aperiodic_idx].JobExecutionTimeCtr / CUS.serverSize);
-                        CUS.serverBudget = AperiodicJob[aperiodic_idx].JobExecutionTimeCtr;
-                        printf("%2d\t Aperiodic job(%d) arrives and sets CUS server's deadline as %2d.\n", OSTimeGet(), aperiodic_idx, CUS.serverDeadline);
-                        if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
-                            fprintf(Output_fp, "%2d\t Aperiodic job(%d) arrives and sets CUS server's deadline as %2d.\n", OSTimeGet(), aperiodic_idx, CUS.serverDeadline);
-                            fclose(Output_fp);
-                        }
-                    }
-                    else
-                    {
-                        printf("%2d\t Aperiodic job(%d) arrives. Do nothing.\n", OSTimeGet(), aperiodic_idx);
-                        if ((Output_err = fopen_s(&Output_fp, "./Output.txt", "a")) == 0) {
-                            fprintf(Output_fp, "%2d\t Aperiodic job(%d) arrives. Do nothing.\n", OSTimeGet(), aperiodic_idx);
-                            fclose(Output_fp);
-                        }
-                    }
-                }
-                CUS_TCB->OSTCBDeadLine = CUS.serverDeadline;
-            }
-            aperiodic_idx++;
-        }
-
 
 #if OS_TICK_STEP_EN > 0u
         switch (OSTickStepState) {                         /* Determine whether we need to process a tick  */
@@ -1347,15 +1178,12 @@ void  OSTimeTick (void)
                         OS_TRACE_TASK_READY(ptcb);
                     }
                 }
-            }
-
+            }   
             /* Arrive time */
             if (ptcb->OSTCBArriTime == OSTimeGet()) {       /* Arrive Time                                  */
                 ptcb->OSTCBDeadLine = OSTimeGet() + ptcb->OSTCBPeriod;
                 OSInsertTaskHeap(ptcb);
             }
-            
-
             /* Rusume function */
             if ((OSTimeGet() - ptcb->OSTCBArriTime == ptcb->OSTCBPeriod) && (ptcb->OSTCBExecuTimeCtr == 0)) {
                 if (ptcb == OSTCBCur)
@@ -2145,50 +1973,19 @@ static  void  OS_SchedNew (void)                 /* Find the highest priority ta
 {
 #if OS_LOWEST_PRIO <= 63u                        /* See if we support up to 64 tasks                   */
     INT8U   y;
-    OS_TCB* temp_tcb;
 
 
     /*y             = OSUnMapTbl[OSRdyGrp];
     OSPrioHighRdy = (INT8U)((y << 3u) + OSUnMapTbl[OSRdyTbl[y]]);*/
 
-    if (OSTaskHeapList[1].tcb->OSTCBId == 3) 
-    {
-        if ((CUS.serverBudget == 0) || (OSCUSRdyQueue == (aperiodic_job_node*)0))
-        {
-            OSTaskHeapList[1].tcb->OSTCBDeadLine = 99;
-            minHeapify(1);
-            if (OSTaskHeapList[1].tcb == CUS_TCB)
-            {
-                OSPrioHighRdy = OSTaskHeapList[0].tcb->OSTCBPrio;
-                return;
-            }
-        }
-    }
-    if (OSTaskHeapList[1].tcb == (OS_TCB*)0)
-    {
-        OSPrioHighRdy = OSTaskHeapList[0].tcb->OSTCBPrio;
-    }
-    else
+    if (OSTaskHeapList[1].tcb != (OS_TCB*)0)
     {
         OSPrioHighRdy = OSTaskHeapList[1].tcb->OSTCBPrio;
     }
-        
-
-    /*if (OSTaskHeapList[1].tcb != (OS_TCB*)0)
-    {
-        if ((OSTaskHeapList[1].tcb->OSTCBId == 3) && (OSCUSRdyQueue == (aperiodic_job_node*)0))
-        {
-            OSPrioHighRdy = OSTaskHeapList[0].tcb->OSTCBPrio;
-        }
-        else
-        {
-            OSPrioHighRdy = OSTaskHeapList[1].tcb->OSTCBPrio;
-        }
-    }
     else
     {
         OSPrioHighRdy = OSTaskHeapList[0].tcb->OSTCBPrio;
-    }*/
+    }
 #else                                            /* We support up to 256 tasks                         */
     INT8U     y;
     OS_PRIO  *ptbl;
@@ -2467,7 +2264,7 @@ INT8U  OS_TCBInit (INT8U    prio,
         OS_EXIT_CRITICAL();
         ptcb->OSTCBStkPtr        = ptos;                   /* Load Stack pointer in TCB                */
         ptcb->OSTCBPrio          = prio;                   /* Load task priority into TCB              */
-        ptcb->OSTCBStat          = OS_STAT_RDY;            /* ansel, Task is suspend                   */
+        ptcb->OSTCBStat          = OS_STAT_RDY;        /* ansel, Task is suspend                   */
         ptcb->OSTCBStatPend      = OS_STAT_PEND_OK;        /* Clear pend status                        */
         ptcb->OSTCBDly           = 0u;                     /* Task is not delayed                      */
 
@@ -2477,21 +2274,13 @@ INT8U  OS_TCBInit (INT8U    prio,
         ptcb->OSTCBStkBottom     = pbos;                   /* Store pointer to bottom of stack         */
         ptcb->OSTCBOpt           = opt;                    /* Store task options                       */
         ptcb->OSTCBId            = id;                     /* Store task ID                            */
-        ptcb->OSTCBExecuTimeCtr  = 99;
-        if ((id != 3) && (prio != OS_TASK_IDLE_PRIO)) { // periodic
+        ptcb->OSTCBExecuTimeCtr = 10000;
+        if (prio != OS_TASK_IDLE_PRIO) {
             ptcb->OSTCBArriTime         = TaskParameter[id - 1].TaskArriveTime;        /* Store arrive time                        */
             ptcb->OSTCBExecuTime        = TaskParameter[id - 1].TaskExecutionTime;     /* Store execution time                     */
-            ptcb->OSTCBExecuTimeCtr     = TaskParameter[id - 1].TaskExecutionTime;     /* Store execution time to count            */
+            ptcb->OSTCBExecuTimeCtr     = TaskParameter[id - 1].TaskExecutionTime;   /* Store execution time to count            */
             ptcb->OSTCBPeriod           = TaskParameter[id - 1].TaskPeriodic;
-        }      
-        if (id == 3) { // CUS
-            ptcb->OSTCBArriTime         = 0;
-            ptcb->OSTCBExecuTime        = 99;
-            ptcb->OSTCBDeadLine         = 99;
-            ptcb->OSTCBPeriod           = 99;
-            ptcb->OSTCBCUSBudget        = 0;
-            CUS_TCB                     = ptcb;
-        }
+        }       
         
 #else
         pext                     = pext;                   /* Prevent compiler warning if not used     */

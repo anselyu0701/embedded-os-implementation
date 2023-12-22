@@ -102,28 +102,22 @@ int  main (void)
     /*Initialize Output File*/
     OutFileInit();
     /*Input File*/
-    InputPeriodicFile();
-    InputAperiodicFile();
+    InputFile();
 
 
     /*Dynamic Create the Stack size*/
-    Task_STK = malloc(PERIODIC_TASK_NUMBER * sizeof(int*));
-    //Job_STK  = malloc(APERIODIC_JOB_NUMBER * sizeof(int*));
+    Task_STK = malloc(TASK_NUMBER * sizeof(int*));
 
     /*for each pointer, allocate storage for an array of ints*/
     int n;
-    for (n = 0; n < PERIODIC_TASK_NUMBER; n++) {
+    for (n = 0; n < TASK_NUMBER; n++) {
         Task_STK[n] = malloc(TASK_STACKSIZE * sizeof(int));
     }
-    /*for (n = 0; n < APERIODIC_JOB_NUMBER; n++) {
-        Job_STK[n] = malloc(TASK_STACKSIZE * sizeof(int));
-    }*/
 
     OSInit();                                              /* Initialize uC/OS-II                                  */
     /*Create Task Set*/
 
-    //printf("Task num %d\n", PERIODIC_TASK_NUMBER);
-    for (n = 0; n < PERIODIC_TASK_NUMBER; n++)
+    for (n = 0; n < TASK_NUMBER; n++)
     {
         OSTaskCreateExt(task,                                 /*Create the task1*/
             &TaskParameter[n],
@@ -136,19 +130,55 @@ int  main (void)
             (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
     }
 
-    ////printf("Job num %d\n", APERIODIC_JOB_NUMBER);
-    //for (n = 0; n < APERIODIC_JOB_NUMBER; n++)
-    //{
-    //    OSTaskCreateExt(task,                                 /*Create the task1*/
-    //        &AperiodicJobParameter[n],
-    //        &Job_STK[n][TASK_STACKSIZE - 1],
-    //        AperiodicJobParameter[n].JobPriority,
-    //        AperiodicJobParameter[n].JobNo,
-    //        &Job_STK[n][0],
-    //        TASK_STACKSIZE,
-    //        &AperiodicJobParameter[n],
-    //        (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
-    //}
+    //OSTaskCreateExt(task1,                                 /*Create the task1*/
+    //    &TaskParameter[0],
+    //    &Task_STK[0][TASK_STACKSIZE - 1],
+    //    TaskParameter[0].TaskPriority,
+    //    TaskParameter[0].TaskID,
+    //    &Task_STK[0][0],
+    //    TASK_STACKSIZE,
+    //    &TaskParameter[0],
+    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+    //OSTaskCreateExt(task2,                                 /*Create the task2*/
+    //    &TaskParameter[1],
+    //    &Task_STK[1][TASK_STACKSIZE - 1],
+    //    TaskParameter[1].TaskPriority,
+    //    TaskParameter[1].TaskID,
+    //    &Task_STK[1][0],
+    //    TASK_STACKSIZE,
+    //    &TaskParameter[1],
+    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+    //OSTaskCreateExt(task3,                                 /*Create the task2*/
+    //    &TaskParameter[2],
+    //    &Task_STK[2][TASK_STACKSIZE - 1],
+    //    TaskParameter[2].TaskPriority,
+    //    TaskParameter[2].TaskID,
+    //    &Task_STK[2][0],
+    //    TASK_STACKSIZE,
+    //    &TaskParameter[2],
+    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+    //OSTaskCreateExt(task4,                                 /*Create the task1*/
+    //    &TaskParameter[3],
+    //    &Task_STK[3][TASK_STACKSIZE - 1],
+    //    TaskParameter[3].TaskPriority,
+    //    TaskParameter[3].TaskID,
+    //    &Task_STK[3][0],
+    //    TASK_STACKSIZE,
+    //    &TaskParameter[3],
+    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
+
+    //OSTaskCreateExt(task5,                                 /*Create the task1*/
+    //    &TaskParameter[4],
+    //    &Task_STK[4][TASK_STACKSIZE - 1],
+    //    TaskParameter[4].TaskPriority,
+    //    TaskParameter[4].TaskID,
+    //    &Task_STK[4][0],
+    //    TASK_STACKSIZE,
+    //    &TaskParameter[4],
+    //    (OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 
     /*
     OSTaskCreateExt( StartupTask,                               /* Create the startup task                              

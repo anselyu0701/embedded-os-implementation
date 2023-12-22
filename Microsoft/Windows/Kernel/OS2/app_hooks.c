@@ -96,7 +96,7 @@ void OutFileInit () {
         printf("Error to clear output file");
 }
 
-void InputPeriodicFile() {
+void InputFile() {
     /*
     * Read File
     * Task Information
@@ -116,80 +116,8 @@ void InputPeriodicFile() {
     char* ptr;
     char* pTmp = NULL;
     int TaskInfo[INFO], i, j = 0;
-    int task_counter = 0;
+    TASK_NUMBER = 0;
     int start_priority = 1;
-    PERIODIC_TASK_NUMBER = 0;
-    while (!feof(fp))
-    {
-        i = 0;
-        memset(str, 0, sizeof(str));
-        fgets(str, sizeof(str) - 1, fp);
-        ptr = strtok_s(str, " ", &pTmp); // partition string by " "
-        task_counter++;
-        while (ptr != NULL)
-        {
-            TaskInfo[i] = atoi(ptr);
-            ptr = strtok_s(NULL, " ", &pTmp);
-            if (task_counter <= 2)
-            {
-                if (i == 0)
-                {
-                    TaskParameter[j].TaskID = TaskInfo[i];
-                    PERIODIC_TASK_NUMBER++;
-                }
-                else if (i == 1)
-                    TaskParameter[j].TaskArriveTime = TaskInfo[i];
-                else if (i == 2)
-                    TaskParameter[j].TaskExecutionTime = TaskInfo[i];
-                else if (i == 3) {
-                    TaskParameter[j].TaskPeriodic = TaskInfo[i];
-                }
-                i++;
-            }
-            else
-            {
-                if (i == 0)
-                {
-                    TaskParameter[j].TaskID = TaskInfo[i];
-                    PERIODIC_TASK_NUMBER++;
-                }
-                else if (i == 1)
-                {
-                    CUS.serverSize = (float)(TaskInfo[i]/100.0);
-                    //printf("Server size is %f\n", CUS.serverSize);
-                }
-                i++;
-            }
-        }
-        /*Initial Priority*/
-        TaskParameter[j].TaskPriority = start_priority;
-        start_priority++;
-        j++;
-        // start_priority++;
-    }
-    fclose(fp);
-}
-
-void InputAperiodicFile() {
-    /*
-    * Read File
-    * Task Information
-    * Task_ID ArriveTime ExecutionTime Periodic
-    */
-    errno_t err;
-    if ((err = fopen_s(&fp, APERIODIC_FILE_NAME, "r")) == 0)        /*task set 1-4*/
-    {
-        printf("The file 'AperiodicJobs.txt' was opened\n");
-    }
-    else
-    {
-        printf("The file 'AperiodicJobs.txt' was not opened\n");
-    }
-
-    char str[MAX];
-    char* ptr;
-    char* pTmp = NULL;
-    int TaskInfo[INFO], i, j = 0;
     while (!feof(fp))
     {
         i = 0;
@@ -202,21 +130,21 @@ void InputAperiodicFile() {
             ptr = strtok_s(NULL, " ", &pTmp);
 
             if (i == 0) {
-                AperiodicJob[j].JobNo = TaskInfo[i];
+                TASK_NUMBER++;
+                TaskParameter[j].TaskID = TaskInfo[i];
             }
             else if (i == 1)
-                AperiodicJob[j].JobArriveTime = TaskInfo[i];
+                TaskParameter[j].TaskArriveTime = TaskInfo[i];
             else if (i == 2)
-            {
-                AperiodicJob[j].JobExecutionTime = TaskInfo[i];
-                AperiodicJob[j].JobExecutionTimeCtr = TaskInfo[i];
-            }
+                TaskParameter[j].TaskExecutionTime = TaskInfo[i];
             else if (i == 3) {
-                AperiodicJob[j].JobDeadline = TaskInfo[i];
+                TaskParameter[j].TaskPeriodic = TaskInfo[i];
             }
             i++;
         }
         /*Initial Priority*/
+        TaskParameter[j].TaskPriority = start_priority;
+        start_priority++;
         j++;
         // start_priority++;
     }

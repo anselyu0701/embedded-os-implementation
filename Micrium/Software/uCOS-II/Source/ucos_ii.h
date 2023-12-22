@@ -71,7 +71,6 @@ extern "C" {
 FILE* fp;
 #define INPUT_FILE_NAME "./TaskSet.txt"
 #define OUTPUT_FILE_NAME "./Output.txt"
-#define APERIODIC_FILE_NAME "./Aperiodicjobs.txt"
 #define MAX 20      // Task maximum number
 #define INFO 4      // information of task
 /*  Input file  */
@@ -91,40 +90,14 @@ typedef struct task_para_set {
     INT16U TaskPriority;
 } task_para_set;
 
-int PERIODIC_TASK_NUMBER;    // number of the input tasks
+int TASK_NUMBER;    // number of the input tasks
 /*  Task Structure  */
-
-///* Constant Utilization Server */
-typedef struct cus_para_set {
-    float serverSize;
-    INT16U serverBudget;
-    INT16U serverDeadline;
-} cus_para_set;
-///* Constant Utilization Server */
-
-/*  Aperiodic Task Structure  */
-typedef struct aperiodic_job_para_set {
-    INT16U JobNo;
-    INT16U JobArriveTime;
-    INT16U JobExecutionTime;
-    INT16U JobExecutionTimeCtr;
-    INT16U JobDeadline;
-} aperiodic_job_para_set;
-
-typedef struct aperiodic_job_node {
-    struct aperiodic_job_para_set* job;
-    struct aperiodic_job_para_set* next;
-} aperiodic_job_node;
-
-/*  Aperiodic Task Structure  */
 
 /*Dynamic Create the Stack Size*/
 OS_STK** Task_STK;
 
 /*Create Task*/
-task_para_set               TaskParameter[OS_MAX_TASKS];
-aperiodic_job_para_set      AperiodicJob[2];
-cus_para_set                CUS;
+task_para_set TaskParameter[OS_MAX_TASKS];
 
 /* Create Task Node Structure */
 typedef struct os_task_node {
@@ -651,7 +624,6 @@ typedef struct os_tcb {
     INT8U            OSTCBPeriod;           /* The period of task                                      */
     INT8U            OSTCBDelayTime;
     INT8U            OSTCBDeadLine;         /* Task's deadline                                         */
-    INT16U           OSTCBCUSBudget;        /* CUS remaining budget                                    */
 #endif
 
     struct os_tcb   *OSTCBNext;             /* Pointer to next     TCB in the TCB list                 */
@@ -779,11 +751,6 @@ OS_EXT  INT32U            OSCtxSwCtr;               /* Counter of number of cont
 OS_EXT  OS_TASK_NODE*     OSTaskHeapList;           /* Pointer to root of linked list of Task Node Heap*/
 OS_EXT  INT8U             OSTaskHeapLength;         /* Counter of number of heap node length           */ 
 OS_EXT  INT8U             resumeCurrTCB;
-OS_EXT  aperiodic_job_node*   OSCUSRdyQueue;
-OS_EXT  OS_TCB*           CUS_TCB;
-OS_EXT  INT8U             isAperiodicJosFinish;
-OS_EXT  INT16U            ap_response_time;
-OS_EXT  INT16U            ap_preemptive_time;
 
 #if (OS_EVENT_EN) && (OS_MAX_EVENTS > 0u)
 OS_EXT  OS_EVENT         *OSEventFreeList;          /* Pointer to list of free EVENT control blocks    */
@@ -1387,9 +1354,7 @@ void          OSStatInit              (void);
 
 INT16U        OSVersion               (void);
 
-void          OSInsertTaskNode        (OS_TASK_NODE *, OS_TCB *);
-
-void          OSPopCUSQueue           (void);
+void OSInsertTaskNode          (OS_TASK_NODE *, OS_TCB *);
 
 /*
 *********************************************************************************************************
@@ -1558,8 +1523,7 @@ void          OSStartHighRdy          (void);
 void          OSIntCtxSw              (void);
 void          OSCtxSw                 (void);
 void          OutFileInit             (void);
-void          InputPeriodicFile       (void);
-void          InputAperiodicFile      (void);
+void          InputFile               (void);
 #endif
 
 
