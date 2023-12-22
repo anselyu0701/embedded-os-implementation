@@ -117,7 +117,7 @@ void InputFile() {
     char* pTmp = NULL;
     int TaskInfo[INFO], i, j = 0;
     TASK_NUMBER = 0;
-    // int start_priority = 1;
+    int start_priority = 1;
     while (!feof(fp))
     {
         i = 0;
@@ -139,11 +139,12 @@ void InputFile() {
                 TaskParameter[j].TaskExecutionTime = TaskInfo[i];
             else if (i == 3) {
                 TaskParameter[j].TaskPeriodic = TaskInfo[i];
-                TaskParameter[j].TaskPriority = TaskInfo[i];
             }
             i++;
         }
-        /*Initial Priority*/        
+        /*Initial Priority*/
+        TaskParameter[j].TaskPriority = start_priority;
+        start_priority++;
         j++;
         // start_priority++;
     }

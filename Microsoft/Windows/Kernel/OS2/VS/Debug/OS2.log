@@ -1,9 +1,10 @@
-﻿  os_core.c
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(1045,9): warning C4013: 'exit' undefined; assuming extern returning int
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(1022,19): warning C4101: 'y': unreferenced local variable
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(2178,35): warning C4305: '=': truncation from 'int' to 'INT8U'
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(2180,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(2181,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(2182,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
-C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Micrium\Software\uCOS-II\Source\os_core.c(2183,64): warning C4244: '=': conversion from 'INT16U' to 'INT8U', possible loss of data
-  OS2.vcxproj -> C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_RM\Microsoft\Windows\Kernel\OS2\VS\Debug\OS2.exe
+﻿  main.c
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_FIFO\Microsoft\Windows\Kernel\OS2\main.c(103,5): warning C4013: 'OutFileInit' undefined; assuming extern returning int
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_FIFO\Microsoft\Windows\Kernel\OS2\main.c(105,5): warning C4013: 'InputFile' undefined; assuming extern returning int
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_FIFO\Microsoft\Windows\Kernel\OS2\main.c(109,16): warning C4013: 'malloc' undefined; assuming extern returning int
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_FIFO\Microsoft\Windows\Kernel\OS2\main.c(109,14): warning C4047: '=': 'OS_STK **' differs in levels of indirection from 'int'
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_FIFO\Microsoft\Windows\Kernel\OS2\main.c(114,21): warning C4047: '=': 'OS_STK *' differs in levels of indirection from 'int'
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_FIFO\Microsoft\Windows\Kernel\OS2\main.c(122,25): warning C4244: 'function': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_FIFO\Microsoft\Windows\Kernel\OS2\main.c(132,25): warning C4244: 'function': conversion from 'INT16U' to 'INT8U', possible loss of data
+C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_FIFO\Microsoft\Windows\Kernel\OS2\main.c(92,17): warning C4101: 'os_err': unreferenced local variable
+  OS2.vcxproj -> C:\Users\Ansel\Desktop\Embedded OS Implementation\PA1\RTOS_M11202117_PA1_FIFO\Microsoft\Windows\Kernel\OS2\VS\Debug\OS2.exe

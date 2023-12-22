@@ -99,6 +99,14 @@ OS_STK** Task_STK;
 /*Create Task*/
 task_para_set TaskParameter[OS_MAX_TASKS];
 
+/* Create Task Node Structure */
+typedef struct os_task_node {
+    struct os_tcb         *tcb;
+    struct os_task_node   *next;
+    struct os_task_node   *prev;
+
+} OS_TASK_NODE;
+
 #ifdef   OS_GLOBALS
 #define  OS_EXT
 #else
@@ -616,6 +624,7 @@ typedef struct os_tcb {
     INT8U            OSTCBExecuTimeCtr;     /* Task execution time for counting                        */
     INT8U            OSTCBArriTime;         /* Task arrive time                                        */
     INT8U            OSTCBPeriod;           /* The period of task                                      */
+    INT8U            OSTCBDelayTime;
 #endif
 
     struct os_tcb   *OSTCBNext;             /* Pointer to next     TCB in the TCB list                 */
@@ -738,7 +747,8 @@ typedef  void                      (*OS_TLS_DESTRUCT_PTR)(OS_TCB    *ptcb,
 */
 
 OS_EXT  INT32U            OSCtxSwCtr;               /* Counter of number of context switches           */
-OS_EXT  INT8U             isCurrTCBFinish;
+OS_EXT  OS_TASK_NODE     *OSTaskNodeHead;           /* Pointer to head of linked list of Task Node Queue */
+OS_EXT  OS_TASK_NODE     *OSTaskNodeRear;           /* Pointer to rear of linked list of Task Node Queue */
 
 #if (OS_EVENT_EN) && (OS_MAX_EVENTS > 0u)
 OS_EXT  OS_EVENT         *OSEventFreeList;          /* Pointer to list of free EVENT control blocks    */
@@ -1340,6 +1350,7 @@ void          OSStatInit              (void);
 
 INT16U        OSVersion               (void);
 
+OS_TASK_NODE* OSPushTaskNode          (OS_TASK_NODE *, OS_TCB *);
 
 /*
 *********************************************************************************************************

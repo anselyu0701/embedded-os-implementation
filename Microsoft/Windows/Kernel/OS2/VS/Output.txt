@@ -1,19 +1,17 @@
 Tick	 Event		 CurrentTask ID		NextTaskID	 ResponseTime	 PreemptionTime	 OSTimeDly
- 1	 Preemption	 task( 3)( 0)		task( 2)( 0)	 
- 2	 Completion	 task( 2)( 0)		task( 1)( 0)		 1		 0		 4
- 4	 Completion	 task( 1)( 0)		task( 3)( 0)		 2		 0		 8
- 6	 Preemption	 task( 3)( 0)		task( 2)( 1)	 
- 7	 Completion	 task( 2)( 1)		task( 3)( 0)		 1		 0		 4
-11	 Preemption	 task( 3)( 0)		task( 2)( 2)	 
-12	 Completion	 task( 2)( 2)		task( 1)( 1)		 1		 0		 4
-14	 Completion	 task( 1)( 1)		task( 3)( 0)		 2		 0		 8
-15	 Completion	 task( 3)( 0)		task(63)		15		 7		 0
-16	 Preemption	 task( 3)( 1)		task( 2)( 3)	 
-17	 Completion	 task( 2)( 3)		task( 3)( 1)		 1		 0		 4
-21	 Preemption	 task( 3)( 1)		task( 2)( 4)	 
-22	 Completion	 task( 2)( 4)		task( 1)( 2)		 1		 0		 4
-24	 Completion	 task( 1)( 2)		task( 3)( 1)		 2		 0		 8
-26	 Preemption	 task( 3)( 1)		task( 2)( 5)	 
-27	 Completion	 task( 2)( 5)		task( 3)( 1)		 1		 0		 4
-28	 Completion	 task( 3)( 1)		task(63)		13		 5		 2
-30	 Preemption	 task(63)		task( 3)( 2)	 
+ 1	 Completion	 task( 1)( 0)		task( 2)( 0)		 1		 0		 4
+ 4	 Completion	 task( 2)( 0)		task(63)		 4		 1		 4
+ 5	 Preemption	 task(63)		task( 1)( 1)	 
+ 6	 Completion	 task( 1)( 1)		task(63)		 1		 0		 4
+ 8	 Preemption	 task(63)		task( 2)( 1)	 
+11	 Completion	 task( 2)( 1)		task( 1)( 2)		 3		 0		 5
+12	 Completion	 task( 1)( 2)		task(63)		 2		 1		 3
+15	 Preemption	 task(63)		task( 1)( 3)	 
+16	 Completion	 task( 1)( 3)		task( 2)( 2)		 1		 0		 4
+19	 Completion	 task( 2)( 2)		task(63)		 3		 0		 5
+20	 Preemption	 task(63)		task( 1)( 4)	 
+21	 Completion	 task( 1)( 4)		task(63)		 1		 0		 4
+24	 Preemption	 task(63)		task( 2)( 3)	 
+27	 Completion	 task( 2)( 3)		task( 1)( 5)		 3		 0		 5
+28	 Completion	 task( 1)( 5)		task(63)		 3		 2		 2
+30	 Preemption	 task(63)		task( 1)( 6)	 
